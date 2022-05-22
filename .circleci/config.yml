@@ -95,7 +95,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build
+    - build:
         type: approval
     - test:
         requires:
