@@ -96,8 +96,8 @@ workflows:
   workflow:
     jobs:
     - build
-    - test:
         type: approval
+    - test:
         requires:
           - build
 #    - test2
