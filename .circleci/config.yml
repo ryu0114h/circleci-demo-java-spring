@@ -1,7 +1,7 @@
-version: 2
+version: 2.1
 jobs:
   build:
-    parallelism: 2
+#    parallelism: 2
     environment:
       # Configure the JVM and Gradle to avoid OOM errors
       _JAVA_OPTIONS: "-Xmx3g"
@@ -92,11 +92,17 @@ jobs:
             command: echo "Hello world"
 
 workflows:
-  version: 2
+  version: 2.1
   workflow:
     jobs:
     - build:
-#        type: approval
+        type: approval
+        pre-steps:
+          - run:
+              command: echo "install custom dependency"
+        post-steps:
+          - run:
+              command: echo "upload artifact to s3"
     - test:
         requires:
           - build
