@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     parallelism: 2
@@ -92,11 +92,16 @@ jobs:
             command: echo "Hello world"
 
 workflows:
-  version: 2
   workflow:
     jobs:
     - build:
-        type: approval
+#        type: approval
+        pre-steps:
+          - run:
+            command: echo "pre-steps"
+        post-steps:
+          - run:
+            command: echo "post-steps"
     - test:
         requires:
           - build
